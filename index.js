@@ -7,6 +7,7 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
+app.use(express.static('./public'));
 
 app.get('/', (req, res) => {
   res.render('index', { message: 'Hello From Node.js' });
