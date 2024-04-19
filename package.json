@@ -20,10 +20,12 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "connect-flash": "^0.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "express-server": "^0.7.0",
+    "express-validator": "^7.0.1",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
     "morgan": "^1.10.0"

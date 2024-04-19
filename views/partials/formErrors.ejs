@@ -1,0 +1,8 @@
+<% if(typeof errors !== 'undefined') { %>
+  <% errors.forEach(function(error) { %>
+    <div role="alert" class="alert alert-error">
+      <i class="fa-regular fa-circle-xmark"></i>
+      <span><%= error.msg %></span>
+    </div>
+  <% }) %>
+<% } %>
