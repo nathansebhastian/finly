@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <main class="flex min-h-screen flex-col p-4">
+    <div class="flex h-24 shrink-0 items-end rounded-lg bg-green-500 p-4 text-5xl">
+      <div class="flex flex-row items-center text-white">
+        <i class="fa-solid fa-coins pr-4"></i>
+        Finly
+      </div>
+    </div>
+    <div class="mt-4 flex grow flex-col gap-4 md:flex-row">
+      <div class="flex flex-col justify-center gap-6 rounded-lg bg-slate-100 px-6 py-10 md:w-2/5 md:px-10">
+        <h1 class="text-3xl font-medium">Welcome to Finly!</h1>
+        <p class="text-xl text-gray-800">
+          The invoicing software for small business and freelancer.
+          <br>
+          Create professional invoices in an instant with smart invoicing software.
+        </p>
+        <a class="btn btn-primary w-32" href="/login">
+          Log in
+          <i class="ml-auto fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="flex items-center justify-center p-6 md:w-3/5 md:px-20 md:py-8">
+        <img alt="Grow your business with Finly" width="400" height="400" src="/images/revenue-bro.png" />
+      </div>
+    </div>
+  </main>
+  <%- include('../partials/script') %>
+</body>
+</html>

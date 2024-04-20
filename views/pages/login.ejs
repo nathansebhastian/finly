@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <main class="flex mx-auto w-full max-w-[400px] flex-col space-y-2.5 p-4 mt-12">
+    <div class="flex h-24 w-full items-end rounded-lg bg-green-500 p-3">
+      <div class="flex flex-row items-center text-white">
+        <i aria-hidden="true" class="fa-3x fa-solid fa-coins pr-4">
+        </i>
+        <p class="text-[44px]">Finly</p>
+      </div>
+    </div>
+    <form action="/login" method="post" class="space-y-3">
+      <div class="flex flex-col rounded-lg bg-slate-100 p-6 gap-4">
+        <h1 class="mb-3 text-2xl">Enter Your Account</h1>
+        <%- include('../partials/formErrors') %>
+        <label class="input input-bordered flex items-center gap-2">
+          <i class="opacity-70 fa-solid fa-envelope">
+          </i>
+          <input name='email' type="email" class="grow" placeholder="Email" value="<%= user?.email || '' %>" />
+        </label>
+        <label class="input input-bordered flex items-center gap-2">
+          <i class="opacity-70 fa-solid fa-key">
+          </i>
+          <input name='password' type="password" class="grow" placeholder="Password" value="<%= user?.password || '' %>" />
+        </label>
+      </div>
+      <button class="btn btn-primary w-full">
+        Log in
+        <i aria-hidden="true" class="ml-auto fa-solid fa-arrow-right fa-lg">
+        </i>
+      </button>
+    </form>
+    <span>
+      Don't have an account? <a href='/signup' class="link link-primary link-hover">Sign Up</a>
+    </span>
+  </main>
+  <%- include('../partials/script') %>
+</body>
+</html>
