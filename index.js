@@ -6,6 +6,7 @@ const flash = require('connect-flash');
 require('dotenv').config();
 require('./libs/dbConnect');
 
+const { verifyUser } = require('./libs/middleware');
 const userRouter = require('./routes/user.route');
 const dashboardRouter = require('./routes/dashboard.route');
 
@@ -29,7 +30,7 @@ app.use(
 app.use(flash());
 
 app.use('/', userRouter);
-app.use('/dashboard', dashboardRouter);
+app.use('/dashboard', verifyUser, dashboardRouter);
 
 app.get('*', (req, res) => {
   res.status(404).render('index', { message: 'Not Found' });
