@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body class="bg-gray-100">
+    <div class="flex h-screen overflow-hidden">
+      <%- include('../partials/navbar') %>
+      <div class="ml-56 flex-grow p-10 overflow-y-auto">
+        <% if (type === 'data') { %>
+          <%- include('../partials/customerData') %>
+          <% } else { %>
+            <%-  include('../partials/customerForm') %>
+        <% } %>
+      </div>
+    </div>
+  <%- include('../partials/script') %>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<h1 class=" mb-4 text-xl md:text-2xl"><%- title %></h1>
+<form action="<%- formAction %>" method="post">
+  <div class="rounded-md bg-slate-100 p-4 md:p-6">
+    <div class="flex flex-col gap-4">
+      <%- include('../partials/formErrors') %>
+      <div class="form-control w-full gap-2"><span class="label-text">Customer Name</span>
+        <label for="name" class="input input-bordered flex items-center gap-2">
+          <i class="fa-regular fa-user"></i>
+          <input id="name" name="name" type="text" class="grow" placeholder="John Doe" value="<%= customer?.name || '' %>" />
+        </label>
+      </div>
+      <div class="form-control w-full gap-2"><span class="label-text">Email</span>
+        <label for="email" class="input input-bordered flex items-center gap-2">
+          <i class="fa-regular fa-envelope"></i>
+          <input id="email" name="email" type="email" class="grow" placeholder="user@mail.com" value="<%= customer?.email || '' %>" />
+        </label>
+      </div>
+      <div class="form-control w-full gap-2"><span class="label-text">Phone</span>
+        <label for="phone" class="input input-bordered flex items-center gap-2">
+          <i class="fa-solid fa-phone"></i>
+          <input id="phone" name="phone" type="tel" class="grow" placeholder="+1223456" value="<%= customer?.phone || '' %>" />
+        </label>
+      </div>
+      <div class="form-control w-full gap-2"><span class="label-text">Address</span>
+        <label for="address" class="input input-bordered flex items-center gap-2">
+          <i class="fa-regular fa-address-card"></i>
+          <input id="address" name="address" type="text" class="grow" placeholder="1 West Pearce St, Richmond Hill, ON L4B 3K3, Canada" value="<%= customer?.address || '' %>" />
+        </label>
+      </div>
+    </div>
+    <div class="mt-6 flex justify-end gap-4">
+      <a class="btn btn-ghost" href="/dashboard/customers">Cancel</a>
+      <button type="submit" class="btn btn-primary">
+        <%= title %>
+      </button>
+    </div>
+</form>

@@ -1,0 +1,66 @@
+<div class="w-full">
+  <div class="flex w-full items-center justify-between">
+    <h1 class="text-2xl"><%= title %></h1>
+  </div>
+  <form>
+    <div class="mt-4 flex items-center justify-between gap-2 md:mt-8">
+      <div class="relative flex flex-1 flex-shrink-0">
+        <label for="search" class="input input-bordered flex items-center gap-2 w-full">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="search" name="search" type="text" class="grow" placeholder="Search customers..." />
+        </label>
+      </div>
+      <a class="btn btn-primary" href="customers/create">
+        <i class="fa-solid fa-plus fa-lg mr-2"></i>
+        New Customer
+      </a>
+    </div>
+  </form>
+  <div class="mt-6 overflow-x-auto bg-white rounded-lg p-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% customers.forEach(function(customer){ %>
+        <tr>
+          <td> <%= customer.name %> </td>
+          <td> <%= customer.email %> </td>
+          <td> <%= customer.address %> </td>
+          <td> <%= customer.phone %> </td>
+          <td>
+            <div class="flex justify-end gap-3">
+              <a class="rounded-md border p-2 hover:bg-gray-100" href="customers/<%= customer._id %>/edit"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+              <button class="rounded-md border p-2 hover:bg-gray-100" onclick="deleteModal('<%= customer._id %>')"><span class="sr-only">Delete</span><i class="fa-solid fa-trash fa-lg"></i></button>
+            </div>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<dialog id="delete-modal" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Are you sure?</h3>
+    <p class="py-4">All invoices related to the customer will be deleted</p>
+    <div class="modal-action">
+      <form id='delete-form' method="post"><button class="btn btn-danger">Yes</button></form>
+      <form method="dialog"><button class="btn">Cancel</button></form>
+    </div>
+  </div>
+</dialog>
+<script>
+  function deleteModal(customerId){
+    const modal = document.querySelector('#delete-modal');
+    const deleteForm = document.querySelector('#delete-form');
+    deleteForm.setAttribute('action', `customers/${customerId}/delete`)
+    modal.showModal();
+  }
+</script>
