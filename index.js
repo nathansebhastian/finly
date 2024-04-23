@@ -33,7 +33,10 @@ app.use('/', userRouter);
 app.use('/dashboard', verifyUser, dashboardRouter);
 
 app.get('*', (req, res) => {
-  res.status(404).render('index', { message: 'Not Found' });
+  res.status(404).render('index', { 
+    title:'Not Found',
+    message: 'Not Found' 
+  });
 });
 
 const PORT = 3000;

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "css": "postcss public/styles/tailwind.css -o public/styles/style.css",
     "devcss": "postcss public/styles/tailwind.css -o public/styles/style.css -w"
   },
   "author": "",
