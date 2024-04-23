@@ -2,6 +2,7 @@ const Customer = require('../libs/models/customer.model');
 const Invoice = require('../libs/models/invoice.model');
 
 const { body, validationResult } = require('express-validator');
+const { USDollar } = require('../libs/formatter');
 
 const validateInvoice = [
   body('customer', 'Select the Customer').notEmpty(),
@@ -27,6 +28,7 @@ const showInvoices = async (req, res) => {
     title: 'Invoices',
     type: 'data',
     invoices,
+    USDollar,
     info: req.flash('info')[0],
   });
 };

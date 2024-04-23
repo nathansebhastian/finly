@@ -5,9 +5,122 @@
   <div class="flex h-screen overflow-hidden">
     <%- include('../partials/navbar') %>
     <div class="ml-56 flex-grow p-10 overflow-y-auto">
-      <h1 class=" mb-4 text-xl md:text-2xl">Dashboard</h1>
+      <h1 class=" mb-4 text-2xl"><%= title %></h1>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl bg-white p-2 shadow-sm">
+          <div class="flex p-4">
+            <i aria-hidden="true" class="fa-solid fa-money-bills"></i>
+            <h3 class="ml-2 text-sm font-medium">Collected</h3>
+          </div>
+          <p class=" truncate rounded-xl border-slate-200 border px-4 py-8 text-center text-2xl">
+            <%= USDollar.format(totalPaid) %>
+          </p>
+        </div>
+        <div class="rounded-xl bg-white p-2 shadow-sm">
+          <div class="flex p-4">
+            <i aria-hidden="true" class="fa-regular fa-clock"></i>
+            <h3 class="ml-2 text-sm font-medium">Pending</h3>
+          </div>
+          <p class=" truncate rounded-xl border-slate-200 border px-4 py-8 text-center text-2xl">
+            <%= USDollar.format(totalPending) %>
+          </p>
+        </div>
+        <div class="rounded-xl bg-white p-2 shadow-sm">
+          <div class="flex p-4">
+            <i aria-hidden="true" class="fa-regular fa-folder-open"></i>
+            <h3 class="ml-2 text-sm font-medium">Total Invoices</h3>
+          </div>
+          <p class=" truncate rounded-xl border-slate-200 border px-4 py-8 text-center text-2xl">
+            <%= invoiceCount %>
+          </p>
+        </div>
+        <div class="rounded-xl bg-white p-2 shadow-sm">
+          <div class="flex p-4">
+            <i aria-hidden="true" class="fa-solid fa-users"></i>
+            <h3 class="ml-2 text-sm font-medium">Total Customers</h3>
+          </div>
+          <p class=" truncate rounded-xl border-slate-200 border px-4 py-8 text-center text-2xl">
+            <%= customerCount %>
+          </p>
+        </div>
+      </div>
+      <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+        <div class="w-full md:col-span-4">
+          <h2 class=" mb-4 text-2xl">
+            Recent Revenue
+          </h2>
+          <div class="rounded-xl bg-white p-4">
+            <canvas id="revenueChart" width="600" height="400"></canvas>
+            <div class="flex items-center pb-2 pt-6">
+              <i aria-hidden="true" class="fa-regular fa-calendar fa-lg"></i>
+              <h3 class="ml-2 text-sm text-slate-1000">Last 6 months</h3>
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full flex-col md:col-span-4">
+          <h2 class=" mb-4 text-2xl">
+            Latest Invoices
+          </h2>
+          <div class="flex grow flex-col justify-between rounded-xl bg-white p-4">
+            <div class="border-slate-200 border px-6">
+              <% latestInvoices.forEach(invoice => { %>
+              <div class="flex flex-row items-center justify-between py-4">
+                <div class="flex items-center">
+                  <p class="truncate font-semibold text-base">
+                    <%= invoice.customer.name %>
+                  </p>
+                  <p class="hidden text-sm text-slate-1000 sm:block">
+                    <% if(invoice.status === 'paid') { %>
+                    <span class="ml-2 badge badge-sm badge-success p-3 gap-3 text-white">
+                      Paid <i class="fa-regular fa-circle-check"></i>
+                    </span>
+                    <% } else { %>
+                    <span class="ml-2 badge badge-sm badge-ghost p-3 gap-3">
+                      Pending <i class="fa-regular fa-clock"></i>
+                    </span>
+                    <% } %>
+                  </p>
+                </div>
+                <p class=" truncate font-medium">
+                  <%= USDollar.format(invoice.amount) %>
+                </p>
+              </div>
+              <% }) %>
+            </div>
+            <div class="flex items-center pb-2 pt-6">
+              <i aria-hidden="true" class="fa-regular fa-note-sticky fa-lg"></i>
+              <h3 class="ml-2 text-sm text-slate-1000">Last 5 invoices</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-<%- include('../partials/script') %>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const revenueData = JSON.parse('<%- revenueData %>');
+    const canvas = document.getElementById('revenueChart');
+    new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: revenueData.map(item => item.month),
+        datasets: [{
+          label: 'Revenue',
+          data: revenueData.map(item => item.revenue),
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  <%- include('../partials/script') %>
 </body>
 </html>

@@ -4,12 +4,9 @@ const router = express.Router();
 const customersRouter = require('./customer.route');
 const invoicesRouter = require('./invoice.route');
 
-router.get('/', (req, res) => {
-  res.render('pages/dashboard', {
-    title: 'Dashboard',
-    info: req.flash('info')[0],
-  });
-});
+const { showDashboard } = require('../controllers/dashboard.controller');
+
+router.get('/', showDashboard);
 
 router.use('/customers', customersRouter);
 router.use('/invoices', invoicesRouter);
